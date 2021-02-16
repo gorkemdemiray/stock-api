@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Stock List</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h3>Stock List</h3>
+		<hr>
+		<a th:href="@{/stocks/add}" class="btn btn-primary btn-sm mb-3">Add Stock</a>
+		
+		<table class="table table-bordered table-striped">
+			<thead class="thead-dark">
+				<tr>
+					<th>Name</th>
+					<th>Current Price</th>
+					<th>Last Update</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="stock : ${stocks}">
+					<td th:text="${stock.name}"></td>
+					<td th:text="${stock.currentPrice}"></td>
+					<td th:text="${stock.lastUpdate}"></td>
+					<td><a th:href="@{'/stocks/update/' + ${stock.id}}" class="btn btn-info btn-sm">Update</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

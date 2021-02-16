@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Update Stock</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<p class="h4 mb-4">Update Stock</p>
+		<form th:action="@{/stocks/update}" th:object="${stock}" method="POST">
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				<p>Please Correct Errors Below</p>
+			</div>
+			
+			<input type="hidden" th:field="*{id}"/>
+			
+			<div class="col-md-6 form-group" th:class="${#fields.hasErrors('currentPrice')} ? 'col-md-6 form-group has-error' : 'col-md-6 form-group'">
+				<input type="text" th:field="*{currentPrice}" th:errorclass="has-error" class="form-control mb-4 col-4" placeholder="Current Price">
+				<span class="help-block" th:if="${#fields.hasErrors('currentPrice')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('currentPrice')}" th:text="${err}"/>
+					</ul>
+				</span>
+			</div>
+			
+			<button type="submit" class="btn btn-info col-3">Save</button>
+		</form>
+		<hr>
+		<a th:href="@{/stocks/list}">Back to Stocks List</a>
+	</div>
+</body>
+</html>
